@@ -34,37 +34,16 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadChecklistItems()
         
-        let item1 = ChecklistItem()
-        item1.text = "Walk the dog"
-        items.append(item1)
-        
-        let item2 = ChecklistItem()
-        item2.text = "Brush my teeth"
-        item2.checked = true
-        items.append(item2)
-        
-        let item3 = ChecklistItem()
-        item3.text = "Learn iOS development"
-        item3.checked = true
-        items.append(item3)
-        
-        let item4 = ChecklistItem()
-        item4.text = "Soccer practice"
-        items.append(item4)
-        
-        let item5 = ChecklistItem()
-        item5.text = "Eat ice cream"
-        items.append(item5)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true // big
+        navigationItem.largeTitleDisplayMode = .never // big
         
         print("Documents folder is \(documentsDirectory())")
         print("Data file path is \(dataFilePath())")
     }
     
     
-    // MARK:- Data Storage
+    // MARK:- Data Storage (Save and Load)
     
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -76,9 +55,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     func saveCheckListItems() {
-        // 1
         let encoder = PropertyListEncoder()
-        // 2
+        
         do {
             let data = try encoder.encode(items)
             try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
@@ -86,6 +64,19 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             print("Error encoding item array: \(error.localizedDescription)")
         }
     }
+    
+    func loadChecklistItems() {
+        let path = dataFilePath()
+        
+        if let data = try? Data(contentsOf: path) {
+            let decoder = PropertyListDecoder()
+            do {
+                items = try decoder.decode([ChecklistItem].self, from: data)
+            } catch {
+                print("Error decoding item array: \(error.localizedDescription)")
+            }
+        }
+     }
     
     
     
@@ -103,6 +94,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
         navigationController?.popViewController(animated: true)
+        
+        saveCheckListItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
@@ -113,6 +106,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             }
         }
         navigationController?.popViewController(animated: true)
+        
+        saveCheckListItems()
     }
     
     // MARK:- Navigation
@@ -163,6 +158,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             configureCheckmark(for: cell, at: indexPath)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        saveCheckListItems()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -170,6 +166,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
+        saveCheckListItems()
     }
 }
 
