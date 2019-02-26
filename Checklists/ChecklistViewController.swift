@@ -10,9 +10,19 @@ import UIKit
 
 class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
-    
+    var checklist: Checklist!
     var items = [ChecklistItem]()
     
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadChecklistItems()
+        title = checklist.name
+        
+        print("Documents folder is \(documentsDirectory())")
+        print("Data file path is \(dataFilePath())")
+    }
     
     func configureCheckmark(for cell: UITableViewCell,
                             at indexPath: IndexPath) {
@@ -30,16 +40,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.text
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadChecklistItems()
-        
-        navigationItem.largeTitleDisplayMode = .never // big
-        
-        print("Documents folder is \(documentsDirectory())")
-        print("Data file path is \(dataFilePath())")
     }
     
     

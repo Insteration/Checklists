@@ -16,6 +16,7 @@
 		D9AD513A2224111500991640 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD51392224111500991640 /* ItemDetailViewController.swift */; };
 		D9AD513C22255D9C00991640 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD513B22255D9C00991640 /* AllListsViewController.swift */; };
 		D9AD513E2225616700991640 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD513D2225616700991640 /* Checklist.swift */; };
+		D9AD514022256A9400991640 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD513F22256A9400991640 /* ListDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D9AD51392224111500991640 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		D9AD513B22255D9C00991640 /* AllListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
 		D9AD513D2225616700991640 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
+		D9AD513F22256A9400991640 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				D9AD513B22255D9C00991640 /* AllListsViewController.swift */,
 				D9AD51272223ECB300991640 /* ChecklistViewController.swift */,
 				D9AD51392224111500991640 /* ItemDetailViewController.swift */,
+				D9AD513F22256A9400991640 /* ListDetailViewController.swift */,
 				D9AD51372224036700991640 /* ChecklistItem.swift */,
 				D9AD51292223ECB300991640 /* Main.storyboard */,
 				D9AD512C2223ECB500991640 /* Assets.xcassets */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9AD51282223ECB300991640 /* ChecklistViewController.swift in Sources */,
+				D9AD514022256A9400991640 /* ListDetailViewController.swift in Sources */,
 				D9AD513A2224111500991640 /* ItemDetailViewController.swift in Sources */,
 				D9AD513E2225616700991640 /* Checklist.swift in Sources */,
 				D9AD51382224036700991640 /* ChecklistItem.swift in Sources */,
