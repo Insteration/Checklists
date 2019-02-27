@@ -29,13 +29,12 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -67,23 +66,28 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist) {
-        let newRowIndex = dataModel.lists.count
+//        let newRowIndex = dataModel.lists.count
         dataModel.lists.append(checklist)
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
+        dataModel.sortChecklists()
+        tableView.reloadData()
+//        let indexPath = IndexPath(row: newRowIndex, section: 0)
+//        let indexPaths = [indexPath]
+//        tableView.insertRows(at: indexPaths, with: .automatic)
         
         navigationController?.popViewController(animated: true)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
-        if let index = dataModel.lists.index(of: checklist) {
-            let indexPath = IndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.textLabel!.text = checklist.name
-            }
-        }
+        
+        dataModel.sortChecklists()
+        tableView.reloadData()
+        
+//        if let index = dataModel.lists.index(of: checklist) {
+//            let indexPath = IndexPath(row: index, section: 0)
+//            if let cell = tableView.cellForRow(at: indexPath) {
+//                cell.textLabel!.text = checklist.name
+//            }
+//        }
         navigationController?.popViewController(animated: true)
     }
     
@@ -103,9 +107,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         } else {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
-        
-        
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
