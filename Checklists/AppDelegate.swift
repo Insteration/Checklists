@@ -23,26 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Notification authorization
         
         let center = UNUserNotificationCenter.current()
-        
-//        center.requestAuthorization(options: [.alert, .sound]) {
-//            granted, error in
-//            if granted {
-//                print("Have permission")
-//            } else {
-//                print("Permission denied")
-//            }
-//        }
-        
-//        let content = UNMutableNotificationContent()
-//        content.title = "Hello!"
-//        content.body = "I'm test notification"
-//        content.sound = UNNotificationSound.default
-//
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-//        let request = UNNotificationRequest(identifier: "MyNotification", content: content, trigger: trigger)
-//
-//        center.add(request)
-        
         center.delegate = self
         
         return true
