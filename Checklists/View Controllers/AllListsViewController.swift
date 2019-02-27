@@ -38,11 +38,11 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        for list in dataModel.lists {
-            let item = ChecklistItem()
-            item.text = "Item for \(list.name)"
-            list.items.append(item)
-        }
+//        for list in dataModel.lists {
+//            let item = ChecklistItem()
+//            item.text = "Item for \(list.name)"
+//            list.items.append(item)
+//        }
         
     }
     

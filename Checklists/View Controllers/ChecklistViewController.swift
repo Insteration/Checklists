@@ -17,8 +17,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         title = checklist.name
     }
     
-    func configureCheckmark(for cell: UITableViewCell,
-                            at indexPath: IndexPath) {
+    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
         
         let label = cell.viewWithTag(1001) as! UILabel
         
@@ -32,7 +31,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
         let label = cell.viewWithTag(1000) as! UILabel
-        label.text = item.text
+//        label.text = item.text
+        label.text = "\(item.itemID): \(item.text)"
     }
     
     // MARK:- Add Item ViewController Delegates
@@ -64,11 +64,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     // MARK:- Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //1
         if segue.identifier == "AddItem" {
-            //2
             let controller = segue.destination as! ItemDetailViewController
-            //3
             controller.delegate = self
         } else if segue.identifier == "EditItem" {
             let controller = segue.destination as! ItemDetailViewController
