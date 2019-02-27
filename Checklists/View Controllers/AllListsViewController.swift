@@ -9,7 +9,7 @@
 import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
-
+    
     var dataModel: DataModel!
     
     let cellIdentifier = "ChecklistCell"
@@ -26,14 +26,19 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             performSegue(withIdentifier: "ShowChecklist", sender: checklist)
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-
+        
         for list in dataModel.lists {
             let item = ChecklistItem()
             item.text = "Item for \(list.name)"
@@ -52,7 +57,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             let controller = segue.destination as! ListDetailViewController
             controller.delegate = self
         }
-
+        
     }
     
     // MARK:- List Detail View Controller Delegates
@@ -81,21 +86,40 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
         navigationController?.popViewController(animated: true)
     }
-
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataModel.lists.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+        // Get Cell
+        let cell: UITableViewCell!
+        if let c = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) {
+            cell = c
+        } else {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+        }
+        
+        
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
+        cell.detailTextLabel!.text = "\(checklist.countUncheckedItems()) Remaining"
         cell.accessoryType = .detailDisclosureButton
-
+        
+        let count = checklist.countUncheckedItems()
+        
+        if checklist.items.count == 0 {
+            cell.detailTextLabel!.text = "(No Items)"
+        } else {
+            cell.detailTextLabel!.text = count == 0 ? "All Done" : "\(count) Remaining"
+        }
+        
         return cell
     }
     
@@ -131,3 +155,5 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
     }
 }
+
+
