@@ -10,6 +10,7 @@ import UIKit
 
 class Checklist: NSObject, Codable {
     var name = ""
+    var iconName = "Folder"
     var items = [ChecklistItem]()
     
     func countUncheckedItems() -> Int {
@@ -20,8 +21,9 @@ class Checklist: NSObject, Codable {
         return count
     }
     
-    init(name: String) {
+    init(name: String, iconName: String = "No Icon") {
         self.name = name
+        self.iconName = iconName
         super.init()
     }
 }
