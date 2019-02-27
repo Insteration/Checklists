@@ -59,6 +59,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // MARK:- Text Field Delegates
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let oldText = textField.text!
         let stringRange = Range(range, in: oldText)!
