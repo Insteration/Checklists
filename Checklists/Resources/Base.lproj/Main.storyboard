@@ -285,6 +285,9 @@
                                 <date key="date" timeIntervalSinceReferenceDate="572970237.09960699">
                                     <!--2019-02-27 14:23:57 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="dateChanged:" destination="8OB-Gl-l7I" eventType="valueChanged" id="PNu-PG-klj"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <constraints>
