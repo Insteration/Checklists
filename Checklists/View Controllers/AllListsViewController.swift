@@ -10,20 +10,18 @@ import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
 
-//    var lists = [Checklist]()
     var dataModel: DataModel!
     
     let cellIdentifier = "ChecklistCell"
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.delegate = self
         
-//        let index = UserDefaults.standard.integer(forKey: "ChecklistIndex")
         let index = dataModel.indexOfSelectedChecklist
         
-        if index != -1 {
+        if index >= 0 && index < dataModel.lists.count {
             let checklist = dataModel.lists[index]
             performSegue(withIdentifier: "ShowChecklist", sender: checklist)
         }
@@ -31,25 +29,11 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Load data
-//        loadChecklists()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-//        var list = Checklist(name: "Birthdays")
-//        lists.append(list)
-//
-//        list = Checklist(name: "Groceries")
-//        lists.append(list)
-//
-//        list = Checklist(name: "Cool Apps")
-//        lists.append(list)
-//
-//        list = Checklist(name: "To Do")
-//        lists.append(list)
-//
+
         for list in dataModel.lists {
             let item = ChecklistItem()
             item.text = "Item for \(list.name)"

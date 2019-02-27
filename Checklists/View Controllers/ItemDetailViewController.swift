@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ItemDetailViewControllerDelegate: class {  // Ключевое слово class указывает, что мы хотим, чтобы протокол AddItemViewControllerDelegate был ограничен типами классов.
+protocol ItemDetailViewControllerDelegate: class {
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController)
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem)
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem)
@@ -45,7 +45,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func cancel() {
         delegate?.itemDetailViewControllerDidCancel(self)
-        //        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func done() {
